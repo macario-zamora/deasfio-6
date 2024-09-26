@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Definir dos sistemas de ecuaciones: uno mal condicionado y otro con una pequeña perturbación
+A1 = np.array([[1, 2, 3], [2, 4.001, 6], [3, 6, 9.001]])
+b = np.array([1, 2, 3])
+
+# Pequeña variación en A
+A2 = np.array([[1, 2, 3], [2, 4, 6], [3, 6, 9]])
+
+# Resolver ambos sistemas
+x1 = np.linalg.solve(A1, b)
+x2 = np.linalg.solve(A2, b)
+
+# Gráfico para mostrar los cambios en las soluciones
+fig, ax = plt.subplots()
+ax.plot([0, x1[0]], [0, x1[1]], label='Solución A1 (mal condicionado)', linestyle='--', color='blue')
+ax.plot([0, x2[0]], [0, x2[1]], label='Solución A2 (perturbación)', linestyle='-', color='red')
+
+ax.set_title('sistema mal condicionado')
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.legend()
+plt.grid(True)
+plt.show()
